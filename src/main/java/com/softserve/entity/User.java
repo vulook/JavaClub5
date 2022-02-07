@@ -26,8 +26,8 @@ public class User {
     @Column(name = "Age")
     private String age;
 
-    @Column(name = "UserRoleID")
-    private int userRoleId;
+//    @Column(name = "UserRoleID")
+//    private int userRoleId;
 
     @Column(name = "Phone")
     private String phone;

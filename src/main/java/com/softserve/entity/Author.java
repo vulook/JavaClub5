@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Data
@@ -23,16 +24,22 @@ public class Author {
     @Column(name = "LastName")
     private String lastName;
 
-
+    //
+//    @ManyToMany
+//    @JoinTable(
+//            name = "coauthor",
+//            joinColumns = @JoinColumn(name = "BookID"),
+//            inverseJoinColumns = @JoinColumn(name = "AuthorID"))
+//    Collection<Book> booksById;
+//
+//(mappedBy = "authorByAuthorId")
+//    private Collection<Book> booksById;
     @ManyToMany
     @JoinTable(
             name = "coauthor",
             joinColumns = @JoinColumn(name = "BookID"),
             inverseJoinColumns = @JoinColumn(name = "AuthorID"))
-    Collection<Book> booksById;
-
-(mappedBy = "authorByAuthorId")
-    private Collection<Book> booksById;
+    private Set<Book> booksById;
 
 
 }

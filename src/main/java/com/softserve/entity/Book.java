@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.Set;
 
 @Entity
 @Data
@@ -22,8 +23,8 @@ public class Book {
     @Column(name = "Genre")
     private String genre;
 
-    @Column(name = "AuthorID")
-    private long authorId;
+//    @Column(name = "AuthorID")
+//    private long authorId;
 
     @Column(name = "Count")
     private int count;
@@ -45,5 +46,6 @@ public class Book {
     @OneToMany(mappedBy = "bookByBookId")
     private Collection<Form> formsById;
 
-
+    @ManyToMany(mappedBy = "booksById")
+    private Set<Author> authors;
 }

@@ -16,11 +16,11 @@ public class Form {
     @Column(name = "ID")
     private long id;
 
-    @Column(name = "UserID")
-    private Long userId;
-
-    @Column(name = "BookID")
-    private long bookId;
+//    @Column(name = "UserID")
+//    private Long userId;
+//
+//    @Column(name = "BookID")
+//    private long bookId;
 
     @Column(name = "StartDate")
     private Date startDate;

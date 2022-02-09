@@ -15,19 +15,14 @@ public class Cart {
     @Column(name = "ID")
     private long id;
 
-//    @Column(name = "UserID")
-//    private long userId;
-//
-//    @Column(name = "BookID")
-//    private long bookId;
+    private byte action;
+    @ManyToOne
+    @JoinColumn(name = "BookID")
+    private Book CartBook;
 
     @ManyToOne
-    @JoinColumn(name = "UserID", referencedColumnName = "ID")
-    private User userByUserId;
-
-    @ManyToOne
-    @JoinColumn(name = "BookID", referencedColumnName = "ID")
-    private Book bookByBookId;
+    @JoinColumn(name = "UserID")
+    private User CartUser;
 
 
 }

@@ -4,6 +4,7 @@ import java.util.Properties;
 
 import javax.sql.DataSource;
 
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -11,6 +12,8 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.HibernateTransactionManager;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -26,53 +29,37 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 })
 public class HibernateConfig {
 
-    @Autowired
-    private Environment environment;
-
-    /************* Start Spring JPA config details **************/
-    @Bean(name = "entityManagerFactory")
-    public LocalContainerEntityManagerFactoryBean getEntityManagerFactoryBean() {
-        LocalContainerEntityManagerFactoryBean lcemfb = new LocalContainerEntityManagerFactoryBean();
-        lcemfb.setJpaVendorAdapter(getJpaVendorAdapter());
-        lcemfb.setDataSource(dataSource());
-        lcemfb.setPersistenceUnitName("myJpaPersistenceUnit");
-        lcemfb.setPackagesToScan("com.softserve");
-        lcemfb.setJpaProperties(hibernateProperties());
-        return lcemfb;
-    }
-
-    @Bean
-    public JpaVendorAdapter getJpaVendorAdapter() {
-        JpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
-        return adapter;
-    }
-
-    @Bean(name = "transactionManager")
-    public PlatformTransactionManager txManager() {
-        JpaTransactionManager jpaTransactionManager = new JpaTransactionManager(
-            getEntityManagerFactoryBean().getObject());
-        return jpaTransactionManager;
-    }
-
-    /************* End Spring JPA config details **************/
-
     @Bean
     public DataSource dataSource() {
         DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(environment.getRequiredProperty("mysql.driver"));
-        dataSource.setUrl(environment.getRequiredProperty("mysql.url"));
-        dataSource.setUsername(environment.getRequiredProperty("mysql.username"));
-        dataSource.setPassword(environment.getRequiredProperty("mysql.password"));
+        dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
+        dataSource.setUrl("jdbc:mysql://localhost:3306/librarydb?useSSL=false");
+        dataSource.setUsername("root");
+        dataSource.setPassword("1234");
         return dataSource;
     }
 
-    private Properties hibernateProperties() {
+
+    @Bean
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource) {
+        LocalSessionFactoryBean sessionFactory = new LocalSessionFactoryBean();
+        sessionFactory.setDataSource(dataSource);
+        sessionFactory.setPackagesToScan("com.softserve.entity");
+
         Properties properties = new Properties();
-        properties.put("hibernate.dialect", environment.getRequiredProperty("hibernate.dialect"));
-        properties.put("hibernate.show_sql", environment.getRequiredProperty("hibernate.show_sql"));
-        properties.put("hibernate.format_sql", environment.getRequiredProperty("hibernate.format_sql"));
-        properties.put("hibernate.hbm2ddl.auto", environment.getRequiredProperty("hibernate.hbm2ddl.auto"));
-        return properties;
+        properties.setProperty("hibernate.dialect", "org.hibernate.dialect.MySQL8Dialect");
+        properties.setProperty("hibernate.show_sql", "true");
+        properties.setProperty("hibernate.format_sql", "true");
+        properties.setProperty("hibernate.hbm2ddl.auto","update");
+        sessionFactory.setHibernateProperties(properties);
+
+        return sessionFactory;
+    }
+
+
+    @Bean
+    public HibernateTransactionManager transactionManager(SessionFactory sessionFactory) {
+        return new HibernateTransactionManager(sessionFactory);
     }
 
 }

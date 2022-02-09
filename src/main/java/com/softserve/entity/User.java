@@ -6,6 +6,8 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
 
 @Entity
 @Data
@@ -26,8 +28,6 @@ public class User {
     @Column(name = "Age")
     private String age;
 
-//    @Column(name = "UserRoleID")
-//    private int userRoleId;
 
     @Column(name = "Phone")
     private String phone;
@@ -40,16 +40,13 @@ public class User {
 
     @Column(name = "RegDate")
     private Date regDate;
-
-    @OneToMany(mappedBy = "userByUserId")
-    private Collection<Cart> cartsById;
-
-    @OneToMany(mappedBy = "userByUserId")
-    private Collection<Form> formsById;
-
     @ManyToOne
-    @JoinColumn(name = "UserRoleID", referencedColumnName = "ID", nullable = false)
-    private UserRole userroleByUserRoleId;
+    @JoinColumn(name = "UserRoleId")
+    private UserRole role;
 
+    @OneToMany(mappedBy = "CartUser")
+    private List<Cart> cartList = new LinkedList<>();
 
+    @OneToMany(mappedBy = "FormUser")
+    private List<Form> formList = new LinkedList<>();
 }

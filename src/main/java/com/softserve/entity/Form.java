@@ -32,12 +32,10 @@ public class Form {
     private Date bookReturned;
 
     @ManyToOne
-    @JoinColumn(name = "UserID", referencedColumnName = "ID")
-    private User userByUserId;
+    @JoinColumn(name = "BookID")
+    private Book FormBook;
 
     @ManyToOne
-    @JoinColumn(name = "BookID", referencedColumnName = "ID")
-    private Book bookByBookId;
-
-
+    @JoinColumn(name = "UserID")
+    private User FormUser;
 }

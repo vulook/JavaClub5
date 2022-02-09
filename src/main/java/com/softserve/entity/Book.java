@@ -4,8 +4,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Collection;
-import java.util.Set;
+import java.util.*;
 
 @Entity
 @Data
@@ -36,16 +35,18 @@ public class Book {
     private Integer ratings;
 
     @ManyToOne
-    @JoinColumn(name = "AuthorID", referencedColumnName = "ID")
-    private Author authorByAuthorId;
+    @JoinColumn(name = "AuthorID")
+    private Author mainAuthor;
 
-    @OneToMany(mappedBy = "bookByBookId")
-    private Collection<Cart> cartsById;
+    @ManyToMany
+    @JoinTable(name = "coauthor",
+            joinColumns = @JoinColumn(name = "BookID"),
+            inverseJoinColumns = @JoinColumn(name = "AuthorID")
+    )
+    private Set<Author> co_authors = new HashSet<>();
+    @OneToMany(mappedBy = "CartBook")
+    private List<Cart> cartList = new LinkedList<>();
 
-
-    @OneToMany(mappedBy = "bookByBookId")
-    private Collection<Form> formsById;
-
-    @ManyToMany(mappedBy = "booksById")
-    private Set<Author> authors;
+    @OneToMany(mappedBy = "FormBook")
+    private List<Form> formList = new LinkedList<>();
 }

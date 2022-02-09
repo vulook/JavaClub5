@@ -6,17 +6,17 @@ import java.util.List;
 
 public interface BookService {
 
-    Book create(Book book);
+//    Book create(Book book);
+//
+//    Book read(Long id);
+//
+//    void delete(Long id);
 
-    Book read(Long id);
-
-    void delete(Long id);
-
-    List<Book>findAll();
-
-    Book findByAuthorID(Long id);
-
-    Book findByRatings(Long id);
-
-    Book findNumberOfBooks(Long id);
+    List<Book> getBooks();
+//
+//    Book findByAuthorID(Long id);
+//
+//    Book findByRatings(Long id);
+//
+//    Book findNumberOfBooks(Long id);
 }

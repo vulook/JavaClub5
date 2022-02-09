@@ -2,50 +2,57 @@ package com.softserve.entity;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "book")
 @Data
 @NoArgsConstructor
 @Table(name = "Book")
 public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
-    @Column(name = "ID")
     private long id;
 
-    @Column(name = "BookName")
     private String bookName;
 
-    @Column(name = "Genre")
     private String genre;
 
-//    @Column(name = "AuthorID")
-//    private long authorId;
+    private long authorId;
 
-    @Column(name = "Count")
     private int count;
 
-    @Column(name = "PageCount")
     private int pageCount;
 
-    @Column(name = "Ratings")
     private Integer ratings;
 
+    //    @ManyToOne
+//    @Cascade(org.hibernate.annotations.CascadeType.SAVE_UPDATE)
+//    @JoinColumn(name = "AuthorID", referencedColumnName = "ID")
+//    private Author authorById;
+//
+//    @OneToMany(mappedBy = "bookByBookId")
+//    private Collection<Cart> cartsById;
+//
+//    @OneToMany(mappedBy = "bookByBookId")
+//    private Collection<Form> formsById;
+//
+//    @ManyToMany(mappedBy = "books",fetch = FetchType.EAGER)
+//    @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST})
+//    private Set<Author> authors = new LinkedHashSet<>();
     @ManyToOne
-    @JoinColumn(name = "AuthorID", referencedColumnName = "ID")
-    private Author authorByAuthorId;
+    @JoinColumn(name = "author_id")
+    private Author mainAuthor;
 
-    @OneToMany(mappedBy = "bookByBookId")
-    private Collection<Cart> cartsById;
-
-
-    @OneToMany(mappedBy = "bookByBookId")
-    private Collection<Form> formsById;
-
-    @ManyToMany(mappedBy = "booksById")
-    private Set<Author> authors;
+    @ManyToMany
+    @JoinTable(name = "co_author_book",
+            joinColumns = @JoinColumn(name = "book_id"),
+            inverseJoinColumns = @JoinColumn(name = "author_id")
+    )
+    private Set<Author> co_authors = new HashSet<>();
 }

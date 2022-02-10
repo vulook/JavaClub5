@@ -1,14 +1,15 @@
 package com.softserve.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
 import java.sql.Date;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
+@ToString(of = "id")
+@EqualsAndHashCode(of = "id")
 @Entity
 @Data
 @NoArgsConstructor
@@ -43,10 +44,10 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "UserRoleId")
     private UserRole role;
-
+    @Setter(AccessLevel.PRIVATE)
     @OneToMany(mappedBy = "CartUser")
     private List<Cart> cartList = new LinkedList<>();
-
+    @Setter(AccessLevel.PRIVATE)
     @OneToMany(mappedBy = "FormUser")
     private List<Form> formList = new LinkedList<>();
 }

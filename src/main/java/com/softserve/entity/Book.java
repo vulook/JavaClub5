@@ -1,14 +1,24 @@
 package com.softserve.entity;
 
-import lombok.Data;
+import lombok.*;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
+import org.hibernate.sql.Insert;
+import org.springframework.data.annotation.ReadOnlyProperty;
+import org.springframework.web.bind.annotation.Mapping;
+
 
 import javax.persistence.*;
 import java.util.*;
 
-@Entity
-@Data
+@Setter
+@Getter
+@AllArgsConstructor
 @NoArgsConstructor
+@EqualsAndHashCode(of = "id")
+@ToString(of = "id")
+@Entity
 @Table(name = "Book")
 public class Book {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,7 +37,6 @@ public class Book {
 
     @Column(name = "Count")
     private int count;
-
     @Column(name = "PageCount")
     private int pageCount;
 
@@ -35,18 +44,23 @@ public class Book {
     private Integer ratings;
 
     @ManyToOne
+    @ReadOnlyProperty//    @Cascade(CascadeType.ALL)
     @JoinColumn(name = "AuthorID")
     private Author mainAuthor;
 
+    @Setter(AccessLevel.PRIVATE)
     @ManyToMany
+//    @Cascade(CascadeType.ALL)
     @JoinTable(name = "coauthor",
             joinColumns = @JoinColumn(name = "BookID"),
             inverseJoinColumns = @JoinColumn(name = "AuthorID")
     )
     private Set<Author> co_authors = new HashSet<>();
-    @OneToMany(mappedBy = "CartBook")
-    private List<Cart> cartList = new LinkedList<>();
-
-    @OneToMany(mappedBy = "FormBook")
-    private List<Form> formList = new LinkedList<>();
+//    @OneToMany(mappedBy = "CartBook")
+//    @Cascade(CascadeType.ALL)
+//    private List<Cart> cartList = new LinkedList<>();
+//
+//    @OneToMany(mappedBy = "FormBook")
+//    @Cascade(CascadeType.ALL)
+//    private List<Form> formList = new LinkedList<>();
 }

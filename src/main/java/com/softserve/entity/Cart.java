@@ -1,12 +1,16 @@
 package com.softserve.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
-
+@EqualsAndHashCode(of = "id")
 @Entity
 @Data
+@ToString(of = "id")
 @NoArgsConstructor
 @Table(name = "Cart")
 public class Cart {

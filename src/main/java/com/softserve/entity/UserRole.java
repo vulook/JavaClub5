@@ -1,7 +1,9 @@
 package com.softserve.entity;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 import javax.persistence.*;
 import java.util.Collection;
@@ -10,6 +12,8 @@ import java.util.List;
 @Entity
 @Data
 @NoArgsConstructor
+@ToString(of = "id")
+@EqualsAndHashCode(of = "id")
 @Table(name = "UserRole")
 public class UserRole {
     @GeneratedValue(strategy = GenerationType.IDENTITY)

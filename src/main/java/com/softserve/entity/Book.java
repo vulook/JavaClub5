@@ -50,7 +50,7 @@ public class Book {
 
     @Setter(AccessLevel.PRIVATE)
     @ManyToMany
-//    @Cascade(CascadeType.ALL)
+    @Cascade(CascadeType.ALL)
     @JoinTable(name = "coauthor",
             joinColumns = @JoinColumn(name = "BookID"),
             inverseJoinColumns = @JoinColumn(name = "AuthorID")

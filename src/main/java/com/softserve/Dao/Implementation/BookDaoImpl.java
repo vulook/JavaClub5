@@ -1,24 +1,31 @@
 package com.softserve.Dao.Implementation;
 
-import com.softserve.Dao.Dao;
+import com.softserve.Dao.BookDao;
 import com.softserve.entity.Author;
 import com.softserve.entity.Book;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
-import javax.persistence.StoredProcedureQuery;
-import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
 @Repository
-public class BookDaoImpl implements Dao<Book> {
+public class BookDaoImpl implements BookDao {
     @Autowired
     private SessionFactory sessionFactory;
+
+    public Book deleteCopy(long id) {
+        Book book = getByID(id);
+        String bookName = book.getBookName();
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("call DeleteOneBookCopy(:bookName)");
+        query.setParameter("bookName",bookName);
+        query.executeUpdate();
+        return book;
+    }
+
 
     @Override
     public List<Book> getAll() {
@@ -59,7 +66,6 @@ public class BookDaoImpl implements Dao<Book> {
         query.executeUpdate();
         return book;
     }
-
     @Override
     public Book getByID(long id) {
         return sessionFactory.getCurrentSession().find(Book.class, id);

@@ -58,4 +58,10 @@ public class BookController {
         bookService.delete(id);
         return "redirect:/book/list";
     }
+    @GetMapping("/delete-copy/{id}")
+    public String deleteOneBook(@PathVariable long id)  {
+        LOG.debug("Delete Book handler method");
+        bookService.deleteCopy(id);
+        return "redirect:/book/list";
+    }
 }

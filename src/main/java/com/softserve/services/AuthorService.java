@@ -5,8 +5,7 @@ import com.softserve.entity.Author;
 import java.util.List;
 
 public interface AuthorService {
-
-    Author create(Author author);
+    Author update(Author author);
 
     Author read(Long id);
 

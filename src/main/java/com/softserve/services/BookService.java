@@ -14,6 +14,8 @@ public interface BookService {
 
     Book delete(Long id);
 
+    Book deleteCopy(Long id);
+
     List<Book>findAll();
 //
 //    Book findByAuthorID(Long id);

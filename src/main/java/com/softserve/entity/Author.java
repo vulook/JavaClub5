@@ -39,7 +39,7 @@ public class Author {
     private Set<Book> books = new HashSet<>();
 
     @Setter(AccessLevel.PRIVATE)
-    @ManyToMany(mappedBy = "co_authors")
+    @ManyToMany(mappedBy = "co_authors",cascade = CascadeType.ALL)
 //    @Cascade({ org.hibernate.annotations.CascadeType.SAVE_UPDATE, org.hibernate.annotations.CascadeType.MERGE, org.hibernate.annotations.CascadeType.PERSIST,org.hibernate.annotations.CascadeType.DELETE})
     private Set<Book> coAuthorBooks = new HashSet<>();
 

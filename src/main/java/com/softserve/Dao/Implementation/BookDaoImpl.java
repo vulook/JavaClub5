@@ -45,7 +45,7 @@ public class BookDaoImpl implements BookDao {
         author= (Author) query.getResultList().stream().findFirst().orElse(null);
         if(author!=null){
             book.setMainAuthor(author);
-//            book.setAuthorID((int) author.getId());
+//          book.setAuthorID((int) author.getId());
         }
         else {
             String name =(book.getMainAuthor().getFirstName());

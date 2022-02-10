@@ -30,6 +30,7 @@
                     <tr>
                         <th>Author First Name</th>
                         <th>Author Last Name</th>
+                        <th>Action</th>
                     </tr>
 
                     <c:forEach var="author" items="${authors}">

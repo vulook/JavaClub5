@@ -4,7 +4,6 @@ import com.softserve.Dao.CartDao;
 import com.softserve.entity.Cart;
 import com.softserve.services.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -33,7 +32,12 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<Cart> findAll() {
+    public List<Cart> getAll() {
         return cartDao.getAll();
+    }
+
+    @Override
+    public List<Cart> findAllByID() {
+        return cartDao.getAllByUser();
     }
 }

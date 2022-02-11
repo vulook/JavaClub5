@@ -2,6 +2,7 @@ package com.softserve.services;
 
 
 import com.softserve.entity.Form;
+import com.softserve.entity.Form;
 
 
 import java.time.LocalDateTime;
@@ -9,14 +10,12 @@ import java.util.List;
 
 public interface FormService {
 
-    Form create(Form form);
+    Form create(Form book);
 
-    Form findById(Long id);
+    Form findByID(Long id);
 
-    Form readInfo(Long id);
-
-    Form findByDate(LocalDateTime time);
-
-    List<Form>findAll();
+    Form delete(Long id);
+    List<Form> getAll();
+    List<Form> findAllByID();
 
 }

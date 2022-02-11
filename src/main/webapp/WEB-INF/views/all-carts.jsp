@@ -38,13 +38,13 @@
 
                     <c:forEach var="tempCart" items="${carts}">
 
-                        <c:url var="updateLink" value="/cart/updateForm">
+                        <c:url var="updateLink" value="/forms/createForm">
                             <c:param name="cartID" value="${tempCart.id}"/>
                         </c:url>
 
 
-                        <c:url var="deleteLink" value="/cart/delete/${tempCart.id}">
-                            <c:param name="cartID" value="${tempCart.id}"/>
+                        <c:url var="deleteLink" value="/carts/delete/${tempCart.id}">
+                            <%--                            <c:param name="cartID" value="${tempCart.id}"/>--%>
                         </c:url>
 
 
@@ -53,10 +53,12 @@
                             <td>${tempCart.cartBook.bookName}</td>
                             <td>${tempCart.cartUser.id}</td>
                             <td>${tempCart.action}</td>
+
                             <td>
 
-                                <a href="${updateLink}">Update</a> | <a href="${deleteLink}"
-                                                                        onclick="if (!(confirm('Are you sure you want to delete this CART?'))) return false">Delete</a>
+                                <a href="${updateLink}">Give Book</a> | <a href="${deleteLink}"
+                                                                           onclick="if (!(confirm('Are you sure you want to delete this CART?'))) return false">Close
+                                request</a>
                             </td>
                         </tr>
                     </c:forEach>

@@ -58,5 +58,4 @@ public class AuthorController {
         authorService.delete(id);
         return "redirect:/author/list";
     }
-
 }

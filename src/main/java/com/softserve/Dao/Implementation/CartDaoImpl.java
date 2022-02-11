@@ -22,7 +22,7 @@ public class CartDaoImpl implements CartDao {
     SessionFactory sessionFactory;
 
     @Override
-    public List<Cart> getAll() {
+    public List<Cart> getAllByUser() {
 User user = new User();
 
         Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
@@ -32,6 +32,11 @@ User user = new User();
         query1.setParameter("id", user.getId());
 
         return query1.getResultList();
+    }
+
+    @Override
+    public List<Cart> getAll() {
+        return sessionFactory.getCurrentSession().createQuery("from Cart").getResultList();
     }
 
     @Override

@@ -25,7 +25,7 @@
         <%--        <br/>--%>
         <div class="panel panel-info">
             <div class="panel-heading">
-                <div class="panel-title">Cart List</div>
+                <div class="panel-title">Book request list</div>
             </div>
             <div class="panel-body">
                 <table class="table table-striped table-bordered">
@@ -36,10 +36,10 @@
                         <th>Action</th>
                     </tr>
 
-                    <c:forEach var="tempCart" items="${carts}">
+                    <c:forEach var="tempCart" items="${newcarts}">
 
-                        <c:url var="updateLink" value="/forms/createForm">
-                            <c:param name="cartID" value="${tempCart.id}"/>
+                        <c:url var="updateLink" value="/forms/addForm/${tempCart.id}">
+                            <%--                            <c:param name="cartID" value="${tempCart.id}"/>--%>
                         </c:url>
 
 
@@ -65,8 +65,50 @@
                 </table>
             </div>
         </div>
-    </div>
+        <br>
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <div class="panel-title">Book return list</div>
+            </div>
+            <div class="panel-body">
+                <table class="table table-striped table-bordered">
+                    <tr>
+                        <th>BookID</th>
+                        <th>BookName</th>
+                        <th>UserID</th>
+                        <th>Action</th>
+                    </tr>
 
+                    <c:forEach var="tempCart" items="${returncarts}">
+
+                        <c:url var="updateLink" value="/forms/CloseRequest/${tempCart.id}">
+                            <%--                            <c:param name="cartID" value="${tempCart.id}"/>--%>
+                        </c:url>
+
+
+                        <c:url var="deleteLink" value="/carts/delete/${tempCart.id}">
+                            <%--                            <c:param name="cartID" value="${tempCart.id}"/>--%>
+                        </c:url>
+
+
+                        <tr>
+                            <td>${tempCart.cartBook.id}</td>
+                            <td>${tempCart.cartBook.bookName}</td>
+                            <td>${tempCart.cartUser.id}</td>
+                            <td>${tempCart.action}</td>
+
+                            <td>
+
+                                <a href="${updateLink}">Recieve book </a> | <a href="${deleteLink}"
+                                                                           onclick="if (!(confirm('Are you sure you want to delete this cart?'))) return false">Delete record
+                                </a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                </table>
+            </div>
+        </div>
+    </div>
 </div>
 </body>
 

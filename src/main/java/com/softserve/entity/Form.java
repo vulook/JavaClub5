@@ -1,8 +1,11 @@
 package com.softserve.entity;
 
+import jakarta.validation.constraints.Null;
 import lombok.*;
 import org.hibernate.annotations.Cascade;
+import org.springframework.data.annotation.ReadOnlyProperty;
 
+import javax.enterprise.inject.Default;
 import javax.persistence.*;
 import java.sql.Date;
 
@@ -31,11 +34,12 @@ public class Form {
     @Column(name = "ReturnDate")
     private Date returnDate;
 
-    @Column(name = "BookReturned")
+    @Column(name = "BookReturned", nullable = true)
+
     private Date bookReturned;
 
     @ManyToOne
-    @Cascade(org.hibernate.annotations.CascadeType.ALL)
+//    @ReadOnlyProperty
     @JoinColumn(name = "BookID")
     private Book FormBook;
 

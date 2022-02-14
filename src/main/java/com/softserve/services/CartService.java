@@ -14,6 +14,7 @@ public interface CartService {
 
     Cart delete(Long id);
     void request(Long id);
+    void returnBook(long id);
 List<Cart> getAll();
     List<Cart> findAllByID();
 

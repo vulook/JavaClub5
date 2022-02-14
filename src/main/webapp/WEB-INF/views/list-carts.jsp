@@ -38,13 +38,13 @@
 
                     <c:forEach var="tempCart" items="${carts}">
 
-                        <c:url var="updateLink" value="/cart/updateForm">
-                            <c:param name="cartID" value="${tempCart.id}"/>
+                        <c:url var="updateLink" value="/books/info">
+                            <c:param name="bookID" value="${tempCart.cartBook.id}"/>
                         </c:url>
 
 
                         <c:url var="deleteLink" value="/cart/delete/${tempCart.id}">
-                            <c:param name="cartID" value="${tempCart.id}"/>
+<%--                            <c:param name="cartID" value="${tempCart.id}"/>--%>
                         </c:url>
 
 
@@ -55,13 +55,17 @@
                             <td>${tempCart.action}</td>
                             <td>
 
-                                <a href="${updateLink}">Update</a> | <a href="${deleteLink}"
+                                <a href="${updateLink}">Details</a> | <a href="${deleteLink}"
                                                                         onclick="if (!(confirm('Are you sure you want to delete this CART?'))) return false">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
+                <input type="button" value="back" style="margin-left: 14.88vw"
+                                           onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books'); return false;"
+                                           class="btn btn-primary"/> <br/>
             </div>
+
         </div>
     </div>
 

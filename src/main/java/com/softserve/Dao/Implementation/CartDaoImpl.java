@@ -74,4 +74,17 @@ User user = new User();
     public Cart getByID(long id) {
         return sessionFactory.getCurrentSession().find(Cart.class, id);
     }
+
+    @Override
+    public void returnBook(long id) {
+        User user = new User();
+
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
+        user = (User) query.getResultList().stream().findFirst().orElse(null);
+        Book book = sessionFactory.getCurrentSession().find(Book.class, id);
+        Query query1 = sessionFactory.getCurrentSession().createSQLQuery("call ReturnBookByUser(:bookid,:uId)");
+        query1.setParameter("uId", user.getId());
+        query1.setParameter("bookid", book.getId());
+        query1.executeUpdate();
+    }
 }

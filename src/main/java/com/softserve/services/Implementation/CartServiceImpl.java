@@ -32,6 +32,11 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public void returnBook(long id) {
+        cartDao.returnBook(id);
+    }
+
+    @Override
     public List<Cart> getAll() {
         return cartDao.getAll();
     }

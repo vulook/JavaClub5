@@ -12,13 +12,23 @@ public class FormServiceImpl implements FormService {
     @Autowired
     FormDao formDao;
     @Override
-    public Form create(Form form) {
+    public void create(String book , long userId,long cartID) {
+        formDao.confirmRequest(book,userId,cartID);
+    }
+
+    @Override
+    public Form update(Form form) {
         return formDao.save(form);
     }
 
     @Override
     public Form findByID(Long id) {
         return formDao.getByID(id);
+    }
+
+    @Override
+    public void returnBook(long book, long userId) {
+        formDao.confirmReturn(book, userId);
     }
 
     @Override

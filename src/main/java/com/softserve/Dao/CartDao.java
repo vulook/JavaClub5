@@ -15,5 +15,7 @@ public interface CartDao {
 
     Cart getByID(long id);
 
+    void returnBook(long id);
+
     void request(long id);
 }

@@ -54,4 +54,21 @@ public class FormDaoImpl implements FormDao {
     public Form getByID(long id) {
         return sessionFactory.getCurrentSession().find(Form.class, id);
     }
+
+    @Override
+    public void confirmRequest(String book, long userID, long cartId) {
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("CALL RequestNeededBook(:book,:user,:cart)");
+        query.setParameter("book",book);
+        query.setParameter("user",userID);
+        query.setParameter("cart",cartId);
+        query.executeUpdate();
+    }
+
+    @Override
+    public void confirmReturn(long book, long userID) {
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("CALL ConfirmReturn(:book,:user)");
+        query.setParameter("book",book);
+        query.setParameter("user",userID);
+        query.executeUpdate();
+    }
 }

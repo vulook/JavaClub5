@@ -5,6 +5,7 @@ import com.softserve.entity.Book;
 import com.softserve.services.BookService;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 @Service
 public class BookServiceImpl implements BookService {
@@ -37,5 +38,35 @@ public class BookServiceImpl implements BookService {
     @Override
     public List<Book> findAll() {
         return bookDao.getAll();
+    }
+
+    @Override
+    public List<Book> findBookByUser(String action) {
+        return bookDao.getOwnBooks(action);
+    }
+
+    @Override
+    public List<Book> findBookByName(String name) {
+        return bookDao.FindBookByName(name);
+    }
+
+    @Override
+    public List<Book> findBookByAuthor(String name) {
+        return bookDao.FindBookByAuthor(name);
+    }
+
+    @Override
+    public List<Book> findPopular(LocalDate start, LocalDate end) {
+        return bookDao.FindMostPopular(start, end);
+    }
+
+    @Override
+    public List<Book> findUnpopular(LocalDate start, LocalDate end) {
+        return bookDao.FindLeastPopular(start, end);
+    }
+
+    @Override
+    public List<Book> findAvailable() {
+        return bookDao.FindAvailable();
     }
 }

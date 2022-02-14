@@ -19,8 +19,17 @@
         <h3 class="text-center">Library BRM - Books Relationship Manager</h3>
         <hr/>
 
-        <input type="button" value="Add Book"
-               onclick="window.location.href='showForm'; return false;"
+        <input type="button" value="My books"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books/my'); return false;"
+               class="btn btn-primary"/>
+        <input type="button" value="My carts"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/carts/my'); return false;"
+               class="btn btn-primary"/>
+        <input type="button" value="My forms"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/forms/my'); return false;"
+               class="btn btn-primary"/> <br/><br/>
+        <input type="button" value="Filter"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books/filter'); return false;"
                class="btn btn-primary"/> <br/>
         <br/>
         <div class="panel panel-info">
@@ -31,40 +40,33 @@
                 <table class="table table-striped table-bordered">
                     <tr>
                         <th>BookName</th>
-                        <th>Author First Name</th>
-                        <th>Author Last Name</th>
+                        <th>Author</th>
                         <th>Genre</th>
-                        <th>Numb.books</th>
-                        <th>Numb.pages</th>
-                        <th>Ratings</th>
                         <th>Action</th>
                     </tr>
 
                     <c:forEach var="tempBook" items="${books}">
 
-                        <c:url var="updateLink" value="/book/updateForm">
+                        <c:url var="updateLink" value="/books/info">
                             <c:param name="bookID" value="${tempBook.id}"/>
                         </c:url>
-                        <c:url var="takeLink" value="/book/delete-copy/${tempBook.id}">
-<%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
-                        </c:url>
 
-                        <c:url var="deleteLink" value="/book/delete/${tempBook.id}">
-<%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
-                        </c:url>
-
+                        <c:if test="${tempBook.count>0}">
+                            <c:url var="takeLink" value="/cart/add/${tempBook.id}">
+                            </c:url>
+                            <%  %>
+                        </c:if>
+                        <c:if test="${tempBook.count<1}">
+                            <c:url var="takeLink" value=""></c:url>
+<%--                            <% "Sorry book is currently unavailable. Choose another or wait!"; %>--%>
+                        </c:if>
                         <tr>
                             <td>${tempBook.bookName}</td>
-                            <td>${tempBook.mainAuthor.firstName}</td>
-                            <td>${tempBook.mainAuthor.lastName}</td>
+                            <td>${tempBook.mainAuthor.firstName}  ${tempBook.mainAuthor.lastName}</td>
                             <td>${tempBook.genre}</td>
-                            <td>${tempBook.count}</td>
-                            <td>${tempBook.pageCount}</td>
-                            <td>${tempBook.ratings}</td>
                             <td>
+                                <a href="${updateLink}">Details</a> | <a href="${takeLink}">Take</a>
 
-                                <a href="${updateLink}">Update</a> | <a href="${takeLink}">Delete copy</a> | <a href="${deleteLink}"
-                                                                        onclick="if (!(confirm('Are you sure you want to delete this fucking BOOK?'))) return false">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

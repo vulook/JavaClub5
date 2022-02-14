@@ -33,39 +33,40 @@
                         <th>BookID</th>
                         <th>BookName</th>
                         <th>UserID</th>
-                        <th>Action</th>
+                        <th>Start date</th>
+                        <th>Return date</th>
+                        <th>Book returned</th>
                     </tr>
 
-                    <c:forEach var="tempCart" items="${carts}">
+                    <c:forEach var="tempForm" items="${forms}">
 
-                        <c:url var="updateLink" value="/books/info">
-                            <c:param name="bookID" value="${tempCart.cartBook.id}"/>
+                        <c:url var="updateLink" value="/forms/updateForm">
+                            <c:param name="formID" value="${tempForm.id}"/>
                         </c:url>
 
 
-                        <c:url var="deleteLink" value="/cart/delete/${tempCart.id}">
+                        <c:url var="deleteLink" value="/forms/delete/${tempForm.id}">
 <%--                            <c:param name="cartID" value="${tempCart.id}"/>--%>
                         </c:url>
 
 
                         <tr>
-                            <td>${tempCart.cartBook.id}</td>
-                            <td>${tempCart.cartBook.bookName}</td>
-                            <td>${tempCart.cartUser.id}</td>
-                            <td>${tempCart.action}</td>
+                            <td>${tempForm.formBook.id}</td>
+                            <td>${tempForm.formBook.bookName}</td>
+                            <td>${tempForm.formUser.id}</td>
+                            <td>${tempForm.startDate}</td>
+                            <td>${tempForm.returnDate}</td>
+                            <td>${tempForm.bookReturned}</td>
                             <td>
 
-                                <a href="${updateLink}">Details</a> | <a href="${deleteLink}"
-                                                                        onclick="if (!(confirm('Are you sure you want to delete this CART?'))) return false">Delete</a>
+                                <a href="${updateLink}">Update</a> | <a href="${deleteLink}"
+                                                                        onclick="if (!(confirm('Are you sure you want to delete?'))) return false">Delete record</a>
+                                |<a href="${updateLink}">Confirm return</a>
                             </td>
                         </tr>
                     </c:forEach>
                 </table>
-                <input type="button" value="back" style="margin-left: 14.88vw"
-                                           onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books'); return false;"
-                                           class="btn btn-primary"/> <br/>
             </div>
-
         </div>
     </div>
 

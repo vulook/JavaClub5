@@ -2,6 +2,7 @@ package com.softserve.services;
 
 import com.softserve.entity.Book;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public interface BookService {
@@ -17,6 +18,16 @@ public interface BookService {
     Book deleteCopy(Long id);
 
     List<Book>findAll();
+
+
+    List<Book>findBookByUser(String action);
+    List<Book>findBookByName(String name);
+    List<Book>findBookByAuthor(String name);
+    List<Book>findPopular(LocalDate start , LocalDate end);
+    List<Book>findUnpopular(LocalDate start , LocalDate end);
+    List<Book>findAvailable();
+
+
 //
 //    Book findByAuthorID(Long id);
 //

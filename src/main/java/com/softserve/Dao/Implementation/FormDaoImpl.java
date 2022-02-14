@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 @Repository
@@ -20,14 +21,16 @@ public class FormDaoImpl implements FormDao {
     @Override
     public List<Form> getAllByUser() {
         User user = new User();
-
+List<Form> formList = new ArrayList<>();
         Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
         user = (User) query.getResultList().stream().findFirst().orElse(null);
+        if (user != null) {
+            Query query1 = sessionFactory.getCurrentSession().createQuery("select c from Form c where c.FormUser.id=:id", Form.class);
+            query1.setParameter("id", user.getId());
+            formList=query1.getResultList();
+        }
 
-        Query query1 = sessionFactory.getCurrentSession().createQuery("select c from Form c where c.FormUser.id=:id", Form.class);
-        query1.setParameter("id", user.getId());
-
-        return query1.getResultList();
+        return formList;
     }
 
     @Override

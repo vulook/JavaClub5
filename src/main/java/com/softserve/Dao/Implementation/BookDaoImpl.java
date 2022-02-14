@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Transactional
@@ -78,15 +79,15 @@ public class BookDaoImpl implements BookDao {
     public List<Book> getOwnBooks(String action) {
 
         User user = new User();
-
+        List<Book> bookList = new ArrayList<>();
         Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
         user = (User) query.getResultList().stream().findFirst().orElse(null);
-
+        if (user == null) return bookList;
         Query query1 = sessionFactory.getCurrentSession().createSQLQuery("call getOwnBooks(:id,:action)").addEntity(Book.class);
         query1.setParameter("id", user.getId());
         query1.setParameter("action", action);
-
-        return query1.getResultList();
+        bookList = query1.getResultList();
+        return bookList;
     }
 
     @Override

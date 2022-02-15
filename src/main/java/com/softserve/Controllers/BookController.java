@@ -168,4 +168,13 @@ public class BookController {
 //        theModel.addAttribute("duration",duration);
     return "stat-book";
     }
+
+    @GetMapping("book/info/{id}")
+    public String showInfo(@PathVariable long theId,
+                               Model theModel) {
+        LOG.debug("Update Book handler method");
+        Book theBook = bookService.findByID(theId);
+        theModel.addAttribute("book", theBook);
+        return "admin-book-info";
+    }
 }

@@ -23,6 +23,22 @@
                onclick="window.location.href='showForm'; return false;"
                class="btn btn-primary"/> <br/>
         <br/>
+        <input type="button" value="Manage authors"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/author/list'); return false;"
+               class="btn btn-primary"/>
+        <input type="button" value="Manage forms"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/forms'); return false;"
+               class="btn btn-primary"/>
+        <input type="button" value="Manage carts"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/carts'); return false;"
+               class="btn btn-primary"/> <br/>
+        <br/>
+        <input type="button" value="Book statistic"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books/stat'); return false;"
+               class="btn btn-primary"/> <br/><br/>
+        <input type="button" value="Reader statistic"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/readers/stat'); return false;"
+               class="btn btn-primary"/> <br/><br/>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Book List</div>
@@ -46,11 +62,11 @@
                             <c:param name="bookID" value="${tempBook.id}"/>
                         </c:url>
                         <c:url var="takeLink" value="/book/delete-copy/${tempBook.id}">
-<%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
+                            <%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
                         </c:url>
 
                         <c:url var="deleteLink" value="/book/delete/${tempBook.id}">
-<%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
+                            <%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
                         </c:url>
 
                         <tr>
@@ -63,8 +79,9 @@
                             <td>${tempBook.ratings}</td>
                             <td>
 
-                                <a href="${updateLink}">Update</a> | <a href="${takeLink}">Delete copy</a> | <a href="${deleteLink}"
-                                                                        onclick="if (!(confirm('Are you sure you want to delete this fucking BOOK?'))) return false">Delete</a>
+                                <a href="${updateLink}">Update</a> | <a href="${takeLink}">Delete copy</a> | <a
+                                    href="${deleteLink}"
+                                    onclick="if (!(confirm('Are you sure you want to delete this fucking BOOK?'))) return false">Delete</a>
                             </td>
                         </tr>
                     </c:forEach>

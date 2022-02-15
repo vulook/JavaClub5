@@ -69,4 +69,26 @@ public class BookServiceImpl implements BookService {
     public List<Book> findAvailable() {
         return bookDao.FindAvailable();
     }
+
+    @Override
+    public List<Integer> findTime() {
+        return bookDao.FindTime();
+    }
+
+    @Override
+    public List<String> getAuthors() {
+        return bookDao.getAuthors();
+    }
+
+    @Override
+    public List<Double> getDuration() {
+        return bookDao.getDuration();
+    }
+
+    @Override
+    public List<Integer> getCount() {
+        return bookDao.getCount();
+    }
+
+
 }

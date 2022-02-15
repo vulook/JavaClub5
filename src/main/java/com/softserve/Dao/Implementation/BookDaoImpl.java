@@ -11,6 +11,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
+import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -125,5 +126,42 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Book> FindAvailable() {
         return sessionFactory.getCurrentSession().createQuery("select b from Book b where b.count > 0", Book.class).getResultList();
+    }
+
+    @Override
+    public List<Integer> FindTime() {
+        User user = new User();
+        List<Integer> bookList = new ArrayList<>();
+        List<Integer> books = new ArrayList<>();
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
+        user = (User) query.getResultList().stream().findFirst().orElse(null);
+        if (user == null) return bookList;
+        Query query1 = sessionFactory.getCurrentSession().createSQLQuery("call UserStat(:id)");
+        query1.setParameter("id", user.getId());
+        bookList = query1.getResultList();
+        for (Number b : bookList) {
+            books.add(b.intValue());
+        }
+        return books;
+    }
+
+    @Override
+    public List<Integer> getCount() {
+        List<Integer> count = new ArrayList<>();
+            Query query = sessionFactory.getCurrentSession().createSQLQuery("call amount()");
+            count = query.getResultList();
+        return count;
+    }
+
+    @Override
+    public List<String> getAuthors() {
+        List<String> authors = sessionFactory.getCurrentSession().createSQLQuery("call GetStatByBook()").getResultList();
+        return authors;
+    }
+
+    @Override
+    public List<Double> getDuration() {
+        List<Double> duration = sessionFactory.getCurrentSession().createSQLQuery("call duration1()").getResultList();
+        return duration;
     }
 }

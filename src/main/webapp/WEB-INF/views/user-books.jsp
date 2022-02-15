@@ -1,3 +1,4 @@
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
@@ -69,23 +70,25 @@
                         <th>BookName</th>
                         <th>Author</th>
                         <th>Genre</th>
+                        <th>Time of reading</th>
                         <th>Action</th>
                     </tr>
 
                     <c:forEach var="tempBook" items="${books}">
 
                         <c:url var="updateLink" value="/books/info">
-                            <c:param name="bookID" value="${tempBook.id}"/>
+                            <c:param name="bookID" value="${tempBook.key.id}"/>
                         </c:url>
-                        <c:url var="takeLink" value="/cart/add/${tempBook.id}">
+                        <c:url var="takeLink" value="/cart/add/${tempBook.key.id}">
                             <%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
                         </c:url>
 
 
                         <tr>
-                            <td>${tempBook.bookName}</td>
-                            <td>${tempBook.mainAuthor.firstName} ${tempBook.mainAuthor.lastName}</td>
-                            <td>${tempBook.genre}</td>
+                            <td>${tempBook.key.bookName}</td>
+                            <td>${tempBook.key.mainAuthor.firstName} ${tempBook.key.mainAuthor.lastName}</td>
+                            <td>${tempBook.key.genre}</td>
+                            <td>${tempBook.value} days </td>
                             <td>
 
                                 <a href="${updateLink}">Details</a> | <a href="${takeLink}">Take again</a>
@@ -93,6 +96,7 @@
                             </td>
                         </tr>
                     </c:forEach>
+
                 </table>
                 <input type="button" value="back" style="margin-left: 14.88vw"
                        onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books'); return false;"

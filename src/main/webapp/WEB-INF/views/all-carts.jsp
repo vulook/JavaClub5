@@ -18,11 +18,9 @@
     <div class="col-md-offset-1 col-md-10">
         <h3 class="text-center">Library BRM - Carts Relationship Manager</h3>
         <hr/>
-
-        <%--        <input type="button" value="Add Cart"--%>
-        <%--               href="/book/list"--%>
-        <%--               class="btn btn-primary"/> <br/>--%>
-        <%--        <br/>--%>
+        <input type="button" value="Back"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/book/list'); return false;"
+               class="btn btn-primary"/> <br/><br/>
         <div class="panel panel-info">
             <div class="panel-heading">
                 <div class="panel-title">Book request list</div>

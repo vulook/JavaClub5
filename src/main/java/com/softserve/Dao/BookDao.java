@@ -17,6 +17,9 @@ public interface BookDao {
     List<Book> FindMostPopular(LocalDate start ,LocalDate end );
     List<Book> FindLeastPopular(LocalDate start ,LocalDate end );
     List<Book> FindAvailable();
-
+    List<Integer>FindTime();
+    List<String> getAuthors();
+    List<Double> getDuration();
+    List<Integer> getCount();
 //    T update(T t);
 }

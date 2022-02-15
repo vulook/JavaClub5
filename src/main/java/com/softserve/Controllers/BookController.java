@@ -1,11 +1,8 @@
 package com.softserve.Controllers;
 
+import java.math.BigInteger;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.softserve.services.BookService;
@@ -17,8 +14,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.softserve.entity.Book;
-
-import javax.servlet.http.HttpServletRequest;
 
 
 @Controller
@@ -51,8 +46,13 @@ public class BookController {
         LOG.debug("Show Books handler method");
         List<Book> theBooks = bookService.findBookByUser("reading");
         List<Book> theBooks1 = bookService.findBookByUser("read");
+        List<Integer> timeList = bookService.findTime();
+        Map<Book, Integer> timeandbook = new HashMap<>();
+        for (int i = 0; i < theBooks1.size(); i++) {
+            timeandbook.put(theBooks1.get(i), timeList.get(i));
+        }
         theModel.addAttribute("reading", theBooks);
-        theModel.addAttribute("books", theBooks1);
+        theModel.addAttribute("books", timeandbook);
         return "user-books";
     }
 
@@ -87,7 +87,6 @@ public class BookController {
         Book theBook = bookService.findByID(theId);
         theModel.addAttribute("book", theBook);
         return "book-form";
-
     }
 
     @GetMapping("/books/filter")
@@ -116,7 +115,7 @@ public class BookController {
     }
 
     @GetMapping("/books/showBooks")
-    public String applyFilter(@RequestParam("bookName") String bookName, @RequestParam("Author") String author, @RequestParam("popular") String popular, @RequestParam("start") String start, @RequestParam("end") String end,@RequestParam("available") String available, Model theModel) {
+    public String applyFilter(@RequestParam("bookName") String bookName, @RequestParam("Author") String author, @RequestParam("popular") String popular, @RequestParam("start") String start, @RequestParam("end") String end, @RequestParam("available") String available, Model theModel) {
         LOG.debug("Show Books handler method");
 //        String author = request.getParameter("bookName");
         List<Book> allFilters = new ArrayList<>();
@@ -138,10 +137,35 @@ public class BookController {
             LocalDate endDate = LocalDate.parse(end);
             allFilters = bookService.findUnpopular(startDate, endDate);
         }
-        if(available.equals("true")){
-            allFilters = allFilters.stream().filter(x->x.getCount()>0).collect(Collectors.toList());
+        if (available.equals("true")) {
+            allFilters = allFilters.stream().filter(x -> x.getCount() > 0).collect(Collectors.toList());
         }
         theModel.addAttribute("books", allFilters);
         return "all-books";
+    }
+
+    @GetMapping("/books/stat")
+    public String showFormForStat(Model theModel) {
+        LOG.debug("Update Book handler method");
+        Map<Book,List<String>> book= new LinkedHashMap<>();
+        List<Book> books = bookService.findAll();
+        List<String> all = new ArrayList<>();
+        List<String> authors = bookService.getAuthors();
+        List<Integer> count = bookService.getCount();
+        List<Double> duration = bookService.getDuration();
+        for (int i = 0; i < books.size(); i++) {
+            String str = authors.get(i)+";"+ count.get(i).toString()+";"+duration.get(i).toString();
+            List<String> temp = new ArrayList<>();
+            temp.add(authors.get(i));
+            temp.add(count.get(i).toString());
+            temp.add(duration.get(i).toString());
+            temp.add(String.valueOf(books.get(i).getCount()-count.get(i)));
+            book.put(books.get(i), temp);
+        }
+        theModel.addAttribute("book",book);
+//        theModel.addAttribute("author",authors);
+//        theModel.addAttribute("count",count);
+//        theModel.addAttribute("duration",duration);
+    return "stat-book";
     }
 }

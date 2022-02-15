@@ -26,6 +26,11 @@ public interface BookService {
     List<Book>findPopular(LocalDate start , LocalDate end);
     List<Book>findUnpopular(LocalDate start , LocalDate end);
     List<Book>findAvailable();
+    List<Integer> findTime();
+    List<String> getAuthors();
+    List<Double> getDuration();
+    List<Integer> getCount();
+
 
 
 //

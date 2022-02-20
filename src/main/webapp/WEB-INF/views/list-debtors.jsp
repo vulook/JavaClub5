@@ -19,10 +19,9 @@
         <h3 class="text-center">Library BRM - Books Relationship Manager</h3>
         <hr/>
 
-        <%--        <input type="button" value="Debtors"--%>
-        <%--               onclick="window.location.href='showForm'; return false;"--%>
-        <%--               class="btn btn-primary"/> <br/>--%>
-        <%--        <br/>--%>
+        <c:url var="send" value="reader/sendToAll">
+            <c:param name="Debtors" value="false"/>
+        </c:url>
         <input type="button" value="All"
                onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/readers'); return false;"
                class="btn btn-primary"/>
@@ -30,7 +29,7 @@
                onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/readers/stat'); return false;"
                class="btn btn-primary"/>
         <input type="button" value="Notify All"
-               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/book/list'); return false;"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/${send}'); return false;"
                class="btn btn-primary"/> <br/><br/>
         <%--        <input type="button" value="Manage carts"--%>
         <%--               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/carts'); return false;"--%>
@@ -61,8 +60,8 @@
 
                     <c:forEach var="tempBook" items="${readers}">
 
-                        <c:url var="updateLink" value="/book/${tempBook.id}"></c:url>
-
+                        <c:url var="updateLink" value="${tempBook.id}">
+                        </c:url>
                         <%--                        <c:url var="takeLink" value="/book/delete-copy/${tempBook.id}">--%>
                         <%--                            &lt;%&ndash;                            <c:param name="bookID" value="${tempBook.id}"/>&ndash;%&gt;--%>
                         <%--                        </c:url>--%>
@@ -82,7 +81,7 @@
 
                             <td>
 
-                                <a href="${updateLink}">Details</a>
+                                <a href="/JavaClub5_team2_war_exploded/readers/${tempBook.id}">Details</a>
                             </td>
                             <td>
 

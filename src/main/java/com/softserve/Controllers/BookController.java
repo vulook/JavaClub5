@@ -169,8 +169,8 @@ public class BookController {
     return "stat-book";
     }
 
-    @GetMapping("book/info/{id}")
-    public String showInfo(@PathVariable long theId,
+    @GetMapping("book/info")
+    public String showInfo(@RequestParam("bookID") long theId,
                                Model theModel) {
         LOG.debug("Update Book handler method");
         Book theBook = bookService.findByID(theId);

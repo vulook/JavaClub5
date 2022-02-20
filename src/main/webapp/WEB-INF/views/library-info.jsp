@@ -26,19 +26,15 @@
             <br/>
             <div class="panel-body">
 
-                <c:forEach var="tempBook" items="${readers}">--%>
-
-<%--                <c:url var="updateLink" value="/books/info">--%>
-<%--                    <c:param name="bookID" value="${tempBook.key.id}"/>--%>
-<%--                </c:url>--%>
-<%--                <c:url var="takeLink" value="/cart/add/${tempBook.key.id}">--%>
-<%--                    &lt;%&ndash;                            <c:param name="bookID" value="${tempBook.id}"/>&ndash;%&gt;--%>
-<%--                </c:url>--%>
-                <label>${tempBook}</label>
-                </c:forEach>
-                <input type="button" value="back" style="margin-left: 14.88vw"
-                           onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/readers'); return false;"
+                <form:form modelAttribute="readers" cssStyle="text-align:center">
+                        <label>${readers.get(0)}</label> <br/>
+                        <label>${readers.get(1)}</label><br/>
+                        <label>${readers.get(2)}</label><br/><br/>
+                    <input type="button" value="back"
+                           onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/book/list'); return false;"
                            class="btn btn-primary"/> <br/>
+                </form:form>
+
             </div>
         </div>
     </div>

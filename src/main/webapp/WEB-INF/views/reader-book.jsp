@@ -34,8 +34,9 @@
 
                     <c:forEach var="tempBook" items="${reading}">
 
-                        <c:url var="updateLink" value="/book/info/${tempBook.id}"></c:url>
-
+                        <c:url var="updateLink" value="/book/info">
+                            <c:param name="bookID" value="${tempBook.id}"/>
+                        </c:url>
                         <tr>
                             <td>${tempBook.bookName}</td>
                             <td>${tempBook.mainAuthor.firstName} ${tempBook.mainAuthor.lastName}</td>
@@ -64,8 +65,9 @@
                     </tr>
 
                     <c:forEach var="tempBook" items="${books}">
-                        <c:url var="updateLink" value="/book/info/${tempBook.id}"></c:url>
-
+                        <c:url var="updateLink" value="/book/info">
+                            <c:param name="bookID" value="${tempBook.id}"/>
+                        </c:url>
 
 <%--                        <c:url var="updateLink" value="/books/info">--%>
 <%--                            <c:param name="bookID" value="${tempBook.key.id}"/>--%>

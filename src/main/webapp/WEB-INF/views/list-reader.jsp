@@ -19,10 +19,9 @@
         <h3 class="text-center">Library BRM - Books Relationship Manager</h3>
         <hr/>
 
-        <%--        <input type="button" value="Debtors"--%>
-        <%--               onclick="window.location.href='showForm'; return false;"--%>
-        <%--               class="btn btn-primary"/> <br/>--%>
-        <%--        <br/>--%>
+        <c:url var="send" value="reader/sendToAll">
+            <c:param name="Debtors" value="false"/>
+        </c:url>
         <input type="button" value="Debtors"
                onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/readers/debtors'); return false;"
                class="btn btn-primary"/>
@@ -30,7 +29,7 @@
                onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/book/list'); return false;"
                class="btn btn-primary"/>
         <input type="button" value="Notify All"
-               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/book/list'); return false;"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/${send}'); return false;"
                class="btn btn-primary"/> <br/><br/>
         <%--        <input type="button" value="Reader statistic"--%>
         <%--               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/readers/stat'); return false;"--%>
@@ -60,8 +59,8 @@
                             <%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
                         </c:url>
 
-                        <c:url var="deleteLink" value="/book/delete/${tempBook.id}">
-                            <%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
+                        <c:url var="deleteLink" value="/reader/sendMail">
+                            <c:param name="ReaderID" value="${tempBook.id}"/>
                         </c:url>
 
                         <tr>
@@ -77,7 +76,7 @@
                                 <a href="${updateLink}">Details</a>
                             </td>
                             <td>
-                                <a href="${updateLink}">Notify</a>
+                                <a href="${deleteLink}">Notify</a>
                             </td>
                         </tr>
                     </c:forEach>

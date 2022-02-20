@@ -19,8 +19,8 @@
         <h3 class="text-center">Library BRM - Books Relationship Manager</h3>
         <hr/>
 
-        <input type="button" value="Add Book"
-               onclick="window.location.href='showForm'; return false;"
+        <input type="button" value="Back"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/book/list'); return false;"
                class="btn btn-primary"/> <br/>
         <br/>
         <div class="panel panel-info">

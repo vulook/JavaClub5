@@ -12,8 +12,8 @@ public class CartServiceImpl implements CartService {
     @Autowired
     CartDao cartDao;
     @Override
-    public Cart create(Cart book) {
-        return cartDao.save(book);
+    public Cart create(Cart book, Long id) {
+        return cartDao.save(book,id);
     }
 
     @Override
@@ -27,13 +27,13 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public void request(Long id) {
-         cartDao.request(id);
+    public void request(Long id, Long userServiceId) {
+         cartDao.request(id,userServiceId);
     }
 
     @Override
-    public void returnBook(long id) {
-        cartDao.returnBook(id);
+    public void returnBook(Long id, Long userServiceId) {
+        cartDao.returnBook(id,userServiceId);
     }
 
     @Override
@@ -42,7 +42,7 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public List<Cart> findAllByID() {
-        return cartDao.getAllByUser();
+    public List<Cart> findAllByID(Long id) {
+        return cartDao.getAllByUser(id);
     }
 }

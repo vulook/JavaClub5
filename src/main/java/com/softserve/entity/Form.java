@@ -5,7 +5,7 @@ import lombok.*;
 import org.hibernate.annotations.Cascade;
 import org.springframework.data.annotation.ReadOnlyProperty;
 
-import javax.enterprise.inject.Default;
+//import javax.enterprise.inject.Default;
 import javax.persistence.*;
 import java.sql.Date;
 

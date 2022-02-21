@@ -19,7 +19,7 @@
         <h3 class="text-center">Library BRM - Books Relationship Manager</h3>
         <hr/>
 
-        <c:url var="send" value="reader/sendToAll">
+        <c:url var="send" value="readers/sendToAll">
             <c:param name="Debtors" value="false"/>
         </c:url>
         <input type="button" value="All"
@@ -54,7 +54,7 @@
                         <th>Age</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Password</th>
+<%--                        <th>Password</th>--%>
                         <th>RegDate</th>
                     </tr>
 
@@ -76,7 +76,7 @@
                             <td>${tempBook.age}</td>
                             <td>${tempBook.email}</td>
                             <td>${tempBook.phone}</td>
-                            <td>${tempBook.password}</td>
+<%--                            <td>${tempBook.password}</td>--%>
                             <td>${tempBook.regDate}</td>
 
                             <td>

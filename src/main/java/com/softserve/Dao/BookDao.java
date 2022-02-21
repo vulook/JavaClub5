@@ -11,13 +11,13 @@ public interface BookDao {
     Book delete(long id);
     Book deleteCopy(long id);
     Book getByID(long id);
-    List<Book> getOwnBooks(String action);
+    List<Book> getOwnBooks(String action, Long userID);
     List<Book> FindBookByName(String name);
     List<Book> FindBookByAuthor(String name);
     List<Book> FindMostPopular(LocalDate start ,LocalDate end );
     List<Book> FindLeastPopular(LocalDate start ,LocalDate end );
     List<Book> FindAvailable();
-    List<Integer>FindTime();
+    List<Integer>FindTime(Long userID);
     List<String> getAuthors();
     List<Double> getDuration();
     List<Integer> getCount();

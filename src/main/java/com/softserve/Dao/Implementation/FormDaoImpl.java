@@ -19,15 +19,12 @@ public class FormDaoImpl implements FormDao {
     SessionFactory sessionFactory;
 
     @Override
-    public List<Form> getAllByUser() {
-        User user = new User();
-List<Form> formList = new ArrayList<>();
-        Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
-        user = (User) query.getResultList().stream().findFirst().orElse(null);
-        if (user != null) {
+    public List<Form> getAllByUser(Long id) {
+        List<Form> formList = new ArrayList<>();
+        if (id != null) {
             Query query1 = sessionFactory.getCurrentSession().createQuery("select c from Form c where c.FormUser.id=:id", Form.class);
-            query1.setParameter("id", user.getId());
-            formList=query1.getResultList();
+            query1.setParameter("id", id);
+            formList = query1.getResultList();
         }
 
         return formList;
@@ -48,7 +45,7 @@ List<Form> formList = new ArrayList<>();
     public Form delete(long id) {
         Form form = getByID(id);
         Query query = sessionFactory.getCurrentSession().createSQLQuery("delete from Form where id=:id");
-        query.setParameter("id",id);
+        query.setParameter("id", id);
         query.executeUpdate();
         return form;
     }
@@ -61,17 +58,17 @@ List<Form> formList = new ArrayList<>();
     @Override
     public void confirmRequest(String book, long userID, long cartId) {
         Query query = sessionFactory.getCurrentSession().createSQLQuery("CALL RequestNeededBook(:book,:user,:cart)");
-        query.setParameter("book",book);
-        query.setParameter("user",userID);
-        query.setParameter("cart",cartId);
+        query.setParameter("book", book);
+        query.setParameter("user", userID);
+        query.setParameter("cart", cartId);
         query.executeUpdate();
     }
 
     @Override
     public void confirmReturn(long book, long userID) {
         Query query = sessionFactory.getCurrentSession().createSQLQuery("CALL ConfirmReturn(:book,:user)");
-        query.setParameter("book",book);
-        query.setParameter("user",userID);
+        query.setParameter("book", book);
+        query.setParameter("user", userID);
         query.executeUpdate();
     }
 }

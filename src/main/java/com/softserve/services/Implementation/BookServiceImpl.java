@@ -41,8 +41,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Book> findBookByUser(String action) {
-        return bookDao.getOwnBooks(action);
+    public List<Book> findBookByUser(String action, Long userID) {
+        return bookDao.getOwnBooks(action,userID);
     }
 
     @Override
@@ -71,8 +71,8 @@ public class BookServiceImpl implements BookService {
     }
 
     @Override
-    public List<Integer> findTime() {
-        return bookDao.FindTime();
+    public List<Integer> findTime(Long userID) {
+        return bookDao.FindTime(userID);
     }
 
     @Override

@@ -7,11 +7,12 @@ import com.softserve.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.MessagingException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import javax.mail.MessagingException;
+
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,7 +63,7 @@ public class ReaderController {
         return "library-info";
     }
 
-    @GetMapping("/reader/sendMail")
+    @GetMapping("/readers/sendMail")
     public String showEmailMessage(@RequestParam("ReaderID") long theId,
                                    Model theModel) {
         LOG.debug("Update Book handler method");
@@ -72,7 +73,7 @@ public class ReaderController {
         return "email-form";
     }
 
-    @GetMapping("/reader/sendToAll")
+    @GetMapping("/readers/sendToAll")
     public String showEmail(@RequestParam("Debtors") String debtors, Model theModel) {
         LOG.debug("Update Book handler method");
         String[] emails;
@@ -91,14 +92,14 @@ public class ReaderController {
         return "email-form";
     }
 
-    @GetMapping("/reader/send")
+    @GetMapping("/readers/send")
     public String send(@RequestParam("emails") String emails, @RequestParam("subject") String subject, @RequestParam("message") String message, Model theModel) {
         LOG.debug("Update Book handler method");
         MailService mailService = new MailService();
         try {
             String[] emailArr = emails.split(" ");
             mailService.sendEmail(emailArr, subject, message);
-        } catch (MessagingException e) {
+        }catch (javax.mail.MessagingException e) {
             e.printStackTrace();
         }
 //        theModel.addAttribute("reader", theReader);

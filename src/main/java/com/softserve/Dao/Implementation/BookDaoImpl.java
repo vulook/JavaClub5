@@ -3,7 +3,6 @@ package com.softserve.Dao.Implementation;
 import com.softserve.Dao.BookDao;
 import com.softserve.entity.Author;
 import com.softserve.entity.Book;
-import com.softserve.entity.Cart;
 import com.softserve.entity.User;
 import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +10,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.persistence.Query;
-import java.math.BigInteger;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -77,15 +75,12 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Book> getOwnBooks(String action) {
+    public List<Book> getOwnBooks(String action, Long userID) {
 
-        User user = new User();
         List<Book> bookList = new ArrayList<>();
-        Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
-        user = (User) query.getResultList().stream().findFirst().orElse(null);
-        if (user == null) return bookList;
+        if (userID == null) return bookList;
         Query query1 = sessionFactory.getCurrentSession().createSQLQuery("call getOwnBooks(:id,:action)").addEntity(Book.class);
-        query1.setParameter("id", user.getId());
+        query1.setParameter("id", userID);
         query1.setParameter("action", action);
         bookList = query1.getResultList();
         return bookList;
@@ -129,15 +124,12 @@ public class BookDaoImpl implements BookDao {
     }
 
     @Override
-    public List<Integer> FindTime() {
-        User user = new User();
+    public List<Integer> FindTime(Long userID) {
         List<Integer> bookList = new ArrayList<>();
         List<Integer> books = new ArrayList<>();
-        Query query = sessionFactory.getCurrentSession().createSQLQuery("call getID()").addEntity(User.class);
-        user = (User) query.getResultList().stream().findFirst().orElse(null);
-        if (user == null) return bookList;
+        if (userID == null) return bookList;
         Query query1 = sessionFactory.getCurrentSession().createSQLQuery("call UserStat(:id)");
-        query1.setParameter("id", user.getId());
+        query1.setParameter("id", userID);
         bookList = query1.getResultList();
         for (Number b : bookList) {
             books.add(b.intValue());
@@ -148,8 +140,8 @@ public class BookDaoImpl implements BookDao {
     @Override
     public List<Integer> getCount() {
         List<Integer> count = new ArrayList<>();
-            Query query = sessionFactory.getCurrentSession().createSQLQuery("call amount()");
-            count = query.getResultList();
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("call amount()");
+        count = query.getResultList();
         return count;
     }
 

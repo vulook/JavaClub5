@@ -20,14 +20,17 @@
         <hr/>
 
         <input type="button" value="My books"
-               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books/my'); return false;"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books/my/'); return false;"
                class="btn btn-primary"/>
         <input type="button" value="My carts"
-               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/carts/my'); return false;"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/cart/my'); return false;"
                class="btn btn-primary"/>
         <input type="button" value="My forms"
-               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/forms/my'); return false;"
-               class="btn btn-primary"/> <br/><br/>
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/form/my'); return false;"
+               class="btn btn-primary"/>
+        <input type="button" value="Log out" style="margin-left:42vw"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/logout'); return false;"
+               class="btn btn-primary"/><br/><br/>
         <input type="button" value="Filter"
                onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books/filter'); return false;"
                class="btn btn-primary"/> <br/>

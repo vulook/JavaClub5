@@ -20,13 +20,13 @@ public interface BookService {
     List<Book>findAll();
 
 
-    List<Book>findBookByUser(String action);
+    List<Book>findBookByUser(String action, Long userID);
     List<Book>findBookByName(String name);
     List<Book>findBookByAuthor(String name);
     List<Book>findPopular(LocalDate start , LocalDate end);
     List<Book>findUnpopular(LocalDate start , LocalDate end);
     List<Book>findAvailable();
-    List<Integer> findTime();
+    List<Integer> findTime(Long userID);
     List<String> getAuthors();
     List<Double> getDuration();
     List<Integer> getCount();

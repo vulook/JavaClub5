@@ -9,6 +9,6 @@ public interface UserRoleService {
 
     Role getID(int id);
 
-    List<UserRole>findAll();
+    List<UserRole> findAll();
 
 }

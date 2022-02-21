@@ -17,6 +17,7 @@ import java.util.List;
 public class ReaderDaoImpl implements ReaderDao {
     @Autowired
     SessionFactory sessionFactory;
+
     @Override
     public List<User> getReaders() {
         return sessionFactory.getCurrentSession().createSQLQuery("call GetReaders()").addEntity(User.class).getResultList();
@@ -28,9 +29,9 @@ public class ReaderDaoImpl implements ReaderDao {
         String avgTime = String.valueOf(sessionFactory.getCurrentSession().createSQLQuery("call GetStatAboutAvrReg()").getResultList().get(0));
         String avgRequest = String.valueOf(sessionFactory.getCurrentSession().createSQLQuery("call getAvgRequest()").getResultList().get(0));
         List<String> strings = new ArrayList<>();
-        strings.add("Average age: "+ avgAge + " years");
-        strings.add("Average time with library :"+avgTime+  " months");
-        strings.add("Average requests per month :" +avgRequest);
+        strings.add("Average age: " + avgAge + " years");
+        strings.add("Average time with library :" + avgTime + " months");
+        strings.add("Average requests per month :" + avgRequest);
         return strings;
     }
 
@@ -41,7 +42,7 @@ public class ReaderDaoImpl implements ReaderDao {
     }
 
     @Override
-    public List<Book> getStatByReader(String action , long id) {
+    public List<Book> getStatByReader(String action, long id) {
 
 
         List<Book> bookList = new ArrayList<>();
@@ -54,8 +55,8 @@ public class ReaderDaoImpl implements ReaderDao {
 
     @Override
     public Integer timeWithLibrary(long id) {
-        Query query =  sessionFactory.getCurrentSession().createSQLQuery("call ReaderTimeWithLibrary(:id)");
-        query.setParameter("id",  id);
+        Query query = sessionFactory.getCurrentSession().createSQLQuery("call ReaderTimeWithLibrary(:id)");
+        query.setParameter("id", id);
         return query.getFirstResult();
     }
 }

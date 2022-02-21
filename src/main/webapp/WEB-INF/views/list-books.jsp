@@ -21,6 +21,9 @@
 
         <input type="button" value="Add Book"
                onclick="window.location.href='showForm'; return false;"
+               class="btn btn-primary"/>
+        <input type="button" value="Log out" style="margin-left:42vw"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/logout'); return false;"
                class="btn btn-primary"/> <br/>
         <br/>
         <input type="button" value="Manage authors"
@@ -34,7 +37,7 @@
                class="btn btn-primary"/> <br/>
         <br/>
         <input type="button" value="Book statistic"
-               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/books/stat'); return false;"
+               onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/book/stat'); return false;"
                class="btn btn-primary"/>
         <input type="button" value="Reader statistic"
                onclick="window.location.replace('http://localhost:8080/JavaClub5_team2_war_exploded/readers'); return false;"
@@ -62,7 +65,7 @@
 
                     <c:forEach var="tempBook" items="${books}">
 
-                        <c:url var="updateLink" value="updateForm">
+                        <c:url var="updateLink" value="/book/updateForm">
                             <c:param name="bookID"
                                      value="${tempBook.id}"/>
                         </c:url>

@@ -5,6 +5,7 @@ import com.softserve.entity.Form;
 import com.softserve.entity.Form;
 import com.softserve.services.CartService;
 import com.softserve.services.FormService;
+import com.softserve.services.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,13 @@ public class FormController {
     FormService formService;
     @Autowired
     CartService cartService;
-    @GetMapping("/forms/my")
+    @Autowired
+    UserService userService;
+
+    @GetMapping("/form/my")
     public String listForms(Model theModel) {
         LOG.debug("Show Forms handler method");
-        List<Form> theForms = formService.findAllByID();
+        List<Form> theForms = formService.findAllByID(userService.getId());
         theModel.addAttribute("forms", theForms);
         return "list-forms";
     }

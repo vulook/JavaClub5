@@ -19,7 +19,7 @@
         <h3 class="text-center">Library BRM - Books Relationship Manager</h3>
         <hr/>
 
-        <c:url var="send" value="reader/sendToAll">
+        <c:url var="send" value="readers/sendToAll">
             <c:param name="Debtors" value="false"/>
         </c:url>
         <input type="button" value="Debtors"
@@ -47,7 +47,7 @@
                         <th>Age</th>
                         <th>Email</th>
                         <th>Phone</th>
-                        <th>Password</th>
+<%--                        <th>Password</th>--%>
                         <th>RegDate</th>
                     </tr>
 
@@ -59,7 +59,7 @@
                             <%--                            <c:param name="bookID" value="${tempBook.id}"/>--%>
                         </c:url>
 
-                        <c:url var="deleteLink" value="/reader/sendMail">
+                        <c:url var="deleteLink" value="/readers/sendMail">
                             <c:param name="ReaderID" value="${tempBook.id}"/>
                         </c:url>
 
@@ -69,7 +69,7 @@
                             <td>${tempBook.age}</td>
                             <td>${tempBook.email}</td>
                             <td>${tempBook.phone}</td>
-                            <td>${tempBook.password}</td>
+<%--                            <td>${tempBook.password}</td>--%>
                             <td>${tempBook.regDate.toString()}</td>
                             <td>
 

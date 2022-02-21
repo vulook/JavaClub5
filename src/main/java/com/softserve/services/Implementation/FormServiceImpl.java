@@ -44,7 +44,7 @@ public class FormServiceImpl implements FormService {
     }
 
     @Override
-    public List<Form> findAllByID() {
-        return formDao.getAllByUser();
+    public List<Form> findAllByID(Long id) {
+        return formDao.getAllByUser(id);
     }
 }

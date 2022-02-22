@@ -19,7 +19,7 @@ public class MailService {
         // тута пошту
         String fromUser = "";
         //тута пароль
-        String fromUserPassword = "VoVkUn2002";
+        String fromUserPassword = "";
         String emailHost = "smtp.gmail.com";
         Properties properties = System.getProperties();
         properties.put("mail.smtp.port", "587");

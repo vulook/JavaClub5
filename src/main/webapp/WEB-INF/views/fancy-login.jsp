@@ -33,7 +33,7 @@
 					<div class="panel-title">Sign In</div>
 				</div>
 
-				<div style="padding-top: 30px" class="panel-body">
+				<div style=" padding-top: 30px" class="panel-body">
 
 					<!-- Login Form -->
 					<form action="./authenticateTheUser"

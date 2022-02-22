@@ -51,6 +51,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public List<User> getAll() {
+        return userDao.getAll();
+    }
+
+    @Override
     public List<String> getStat() {
         return readerDao.getStat();
     }

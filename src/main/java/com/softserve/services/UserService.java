@@ -13,6 +13,8 @@ public interface UserService extends UserDetailsService {
 
     List<User> getReaders();
 
+    List<User> getAll();
+
     List<String> getStat();
 
     List<User> getDebtors();

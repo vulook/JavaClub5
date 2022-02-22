@@ -8,10 +8,10 @@
 
 <body>
 
-	<h2>Access Denied - You are not authorized to access admin resource.</h2>
+	<h2>Access Denied - You are not authorized to access user resource.</h2>
 	<hr>
 
-	<a href="../books">Back to Home Page</a>
+	<a href="../book/list">Back to Home Page</a>
 
 </body>
 

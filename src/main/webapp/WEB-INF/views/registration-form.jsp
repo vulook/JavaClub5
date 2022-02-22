@@ -43,15 +43,7 @@
             </div>
 
             <div style="padding-top: 30px" class="panel-body">
-                <%--                <c:if test="${registrationError}">--%>
-                <%--                    <label>This user already exist</label>--%>
 
-                <%--                </c:if>--%>
-
-                <%--    <c:choose>--%>
-                <%--        <c:when test="${registrationError==null}">--%>
-
-                <!-- Registration Form -->
                 <form:form action="processRegistrationForm"
                            modelAttribute="validationForm"
                            class="form-horizontal">
@@ -60,14 +52,6 @@
                     <div class="form-group">
                         <div class="col-xs-15">
                             <div>
-<%--                                <c:if test="${registrationError eq null }" var="result"/>--%>
-<%--                                    <c:out value="${result}"></c:out>--%>
-                                <!-- Check for registration error -->
-                                    <%--                                <c:if test="${registrationError != null}" >--%>
-                                    <%--                                    <div class="alert alert-danger col-xs-offset-1 col-xs-10">--%>
-                                    <%--                                            ${registrationError}--%>
-                                    <%--                                    </div>--%>
-                                    <%--                                </c:if>--%>
 
                             </div>
                         </div>
@@ -82,57 +66,57 @@
                                     class="form-control"/>
                     </div>
 
-                                        <!-- Password -->
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <form:errors path="password" cssClass="error"/>
-                                            <form:password path="password" required="required" id="password" name="password"
-                                                           pattern="^\S{3,}$"
-                                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;"
-                                                           placeholder="Password" class="form-control"/>
-                                        </div>
+                    <!-- Password -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <form:errors path="password" cssClass="error"/>
+                        <form:password path="password" required="required" id="password" name="password"
+                                       pattern="^\S{3,}$"
+                                       onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Must have at least 6 characters' : ''); if(this.checkValidity()) form.password_two.pattern = this.value;"
+                                       placeholder="Password" class="form-control"/>
+                    </div>
 
-                                        <!-- Confirm Password -->
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
-                                            <form:errors path="matchingPassword" cssClass="error"/>
-                                            <form:password path="matchingPassword" required="required" id="password_two" name="password_two"
-                                                           pattern="^\S{6,}$"
-                                                           onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
-                                                           placeholder="Verify Password" class="form-control"/>
-                                        </div>
+                    <!-- Confirm Password -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+                        <form:errors path="matchingPassword" cssClass="error"/>
+                        <form:password path="matchingPassword" required="required" id="password_two" name="password_two"
+                                       pattern="^\S{6,}$"
+                                       onchange="this.setCustomValidity(this.validity.patternMismatch ? 'Please enter the same Password as above' : '');"
+                                       placeholder="Verify Password" class="form-control"/>
+                    </div>
 
-                                        <!-- First name -->
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <form:errors path="firstName" cssClass="error"/>
-                                            <form:input path="firstName" required="required" minlength="3" placeholder="first name (*)"
-                                                        class="form-control"/>
-                                        </div>
+                    <!-- First name -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <form:errors path="firstName" cssClass="error"/>
+                        <form:input path="firstName" required="required" minlength="3" placeholder="first name (*)"
+                                    class="form-control"/>
+                    </div>
 
-                                        <!-- Last name -->
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <form:errors path="lastName" cssClass="error"/>
-                                            <form:input path="lastName" required="required" placeholder="last name (*)" minlength="3"
-                                                        class="form-control"/>
-                                        </div>
+                    <!-- Last name -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <form:errors path="lastName" cssClass="error"/>
+                        <form:input path="lastName" required="required" placeholder="last name (*)" minlength="3"
+                                    class="form-control"/>
+                    </div>
 
-                                        <!-- Age -->
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <form:errors path="age" cssClass="error"/>
-                                            <form:input path="age" required="required" placeholder="age (*)" minlength="3"
-                                                        class="form-control"/>
-                                        </div>
+                    <!-- Age -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <form:errors path="age" cssClass="error"/>
+                        <form:input path="age" required="required" placeholder="age (*)"
+                                    class="form-control"/>
+                    </div>
 
-                                        <!-- Phone -->
-                                        <div style="margin-bottom: 25px" class="input-group">
-                                            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
-                                            <form:errors path="phone" cssClass="error"/>
-                                            <form:input path="phone" required="required" placeholder="phone (*)" minlength="3"
-                                                        class="form-control"/>
-                                        </div>
+                    <!-- Phone -->
+                    <div style="margin-bottom: 25px" class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <form:errors path="phone" cssClass="error"/>
+                        <form:input path="phone" required="required" placeholder="phone (*)" minlength="3"
+                                    class="form-control"/>
+                    </div>
 
                     <!-- Register Button -->
                     <div style="margin-top: 10px" class="form-group">

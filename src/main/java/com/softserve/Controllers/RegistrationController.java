@@ -26,6 +26,8 @@ public class RegistrationController {
     @Autowired
     private UserService userService;
 
+
+    List<String> list = new ArrayList<>();
     private final Logger logger = Logger.getLogger(getClass().getName());
 
     @InitBinder
@@ -37,6 +39,7 @@ public class RegistrationController {
 
     @GetMapping("/showRegistrationForm")
     public String showMyLoginPage(Model theModel) {
+        theModel.addAttribute("registrationError",list);
         theModel.addAttribute("validationForm", new ValidationForm());
         return "registration-form";
     }
@@ -54,8 +57,9 @@ public class RegistrationController {
 
         User existing = userService.findByUserEmail(userEmail);
         if (existing != null) {
+            list.add("User with this email already exists!");
             theModel.addAttribute("validationForm", new ValidationForm());
-            theModel.addAttribute("registrationError",null);
+            theModel.addAttribute("registrationError",list);
             logger.warning("User name already exists.");
             return "registration-form";
         }

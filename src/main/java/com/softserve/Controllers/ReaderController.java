@@ -59,6 +59,7 @@ public class ReaderController {
     public String stat(Model theModel) {
         LOG.debug("Show Books handler method");
         List<String> theReaders = userService.getStat();
+
         theModel.addAttribute("readers", theReaders);
         return "library-info";
     }

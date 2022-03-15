@@ -17,7 +17,7 @@ public class MailService {
         Session newSession = null;
         MimeMessage mimeMessage = null;
         // тута пошту
-        String fromUser = "";
+        String fromUser = "vovkunm@gmail.com";
         //тута пароль
         String fromUserPassword = "";
         String emailHost = "smtp.gmail.com";
